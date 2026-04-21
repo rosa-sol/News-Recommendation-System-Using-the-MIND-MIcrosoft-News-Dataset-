@@ -1,4 +1,4 @@
-# News-Recommendation-System-Using-the-MIND-MIcrosoft-News-Dataset-
+# News Recommendation-System Using the MIND MIcrosoft News Dataset
 News Recommendation System using MIND Dataset
 
 Course: Machine Learning Capstone
