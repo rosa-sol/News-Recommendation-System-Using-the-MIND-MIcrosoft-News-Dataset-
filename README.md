@@ -45,27 +45,29 @@ Fields: user ID, timestamp, click history, impressions
 news.tsv
 
 ## Project structure:
-'''
+## Project Structure
+
+```text
 mind-recommender/
 ├── data/
-│   ├── MINDsmall_train/
-│   ├── MINDsmall_dev/
-│   └── glove/
+│   ├── MINDsmall_train/      # Training set (behaviors, news, entities)
+│   ├── MINDsmall_dev/        # Validation set
+│   └── glove/                # Pre-trained word embeddings
 ├── src/
-│   ├── data_loader.py
-│   ├── news_encoder.py
-│   ├── user_encoder.py
-│   ├── model.py
-│   ├── train.py
-│   └── evaluate.py
+│   ├── data_loader.py        # Custom Dataset and DataLoader classes
+│   ├── news_encoder.py       # PLM or CNN-based news representation
+│   ├── user_encoder.py       # GRU/Attention-based user history encoding
+│   ├── model.py              # Recommender architecture (e.g., NRMS, LSTUR)
+│   ├── train.py              # Model training loop and optimization
+│   └── evaluate.py           # Metrics (AUC, MRR, nDCG@k)
 ├── notebooks/
-│   ├── 01_eda.ipynb
-│   ├── 02_preprocessing.ipynb
-│   └── 03_training.ipynb
-├── models/
-├── results/
-└── README.md
-'''
+│   ├── 01_eda.ipynb          # Dataset statistics and word clouds
+│   ├── 02_preprocessing.ipynb # Tokenization and embedding mapping
+│   └── 03_training.ipynb     # Interactive training and visualization
+├── models/                   # Saved .pth or .h5 model weights
+├── results/                  # Generated plots and performance logs
+└── README.md                 # Project overview and setup instructions
+
 ## 4.2 Exploratory Data Analysis
 
 The dataset was analyzed to understand user behavior and content structure.
