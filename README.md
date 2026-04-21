@@ -14,7 +14,7 @@ News recommendation presents unique challenges due to rapidly changing user inte
 The workflow includes data preprocessing, feature engineering, model development, training, evaluation, and analysis.
 
 ## Learning Objectives
-
+```text
 By completing this project, the following skills are developed:
 
 Understanding recommendation system pipelines
@@ -23,7 +23,7 @@ Applying NLP techniques to news content
 Implementing deep learning-based recommender systems in PyTorch
 Evaluating ranking models using standard metrics
 Performing error analysis and model interpretation
-
+```
 ## Dataset Description (MIND)
 
 The MIND dataset is a large-scale news recommendation dataset released by Microsoft Research. It contains anonymized user interaction logs collected from Microsoft News.
@@ -88,7 +88,7 @@ Event-driven spikes in daily click behavior
 4.3 Data Preprocessing and Feature Engineering
 
 ### Steps performed:
-
+```text
 Tokenization of news titles
 Vocabulary construction with frequency filtering
 Mapping tokens to GloVe embeddings
@@ -96,7 +96,7 @@ Fixed-length padding and truncation of titles
 Parsing user behavior sequences
 Generation of training samples using negative sampling
 Train/validation split following temporal order
-
+```
 ### Each training sample consists of:
 
 User click history
@@ -105,7 +105,7 @@ Multiple negative sampled articles
 4.4 Model Architecture
 
 ## The model is based on an NRMS-style neural recommendation architecture.
-
+```text
 News Encoder
 Word embedding layer (GloVe)
 Multi-head self-attention
@@ -116,9 +116,9 @@ Shared news encoder weights
 Attention-based aggregation of user history
 Scoring Function
 Dot product between user representation and candidate news vectors
-
+```
 ### Key settings:
-
+```
 Optimizer: Adam
 Learning rate: 1e-4
 Batch size: 64
@@ -127,15 +127,15 @@ Epochs: 5
 Gradient clipping applied for stability
 
 Loss encourages higher scores for clicked articles compared to non-clicked ones.
-
+```
 ### Evaluation and Metrics
-
+```
 The model is evaluated using standard recommendation metrics:
 
 AUC (Area Under ROC Curve)
 MRR (Mean Reciprocal Rank)
 nDCG@5
 nDCG@10
-
+```
 These metrics evaluate ranking quality and the model’s ability to prioritize relevant news articles.
 
