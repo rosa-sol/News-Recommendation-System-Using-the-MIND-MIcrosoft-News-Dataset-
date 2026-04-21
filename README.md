@@ -45,7 +45,7 @@ Fields: user ID, timestamp, click history, impressions
 news.tsv
 
 ## Project structure:
-"""
+'''
 mind-recommender/
 ├── data/
 │   ├── MINDsmall_train/
@@ -65,7 +65,7 @@ mind-recommender/
 ├── models/
 ├── results/
 └── README.md
-"""
+'''
 ## 4.2 Exploratory Data Analysis
 
 The dataset was analyzed to understand user behavior and content structure.
