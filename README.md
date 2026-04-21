@@ -42,7 +42,7 @@ behaviors.tsv
 User impression logs
 Fields: user ID, timestamp, click history, impressions, news.tsv
 
-## Project structure:
+# Methodology:
 ## Project Structure
 
 ```text
