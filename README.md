@@ -148,23 +148,3 @@ nDCG@10
 
 These metrics evaluate ranking quality and the model’s ability to prioritize relevant news articles.
 
-5. Project Structure
-mind-recommender/
-├── data/
-│   ├── MINDsmall_train/
-│   ├── MINDsmall_dev/
-│   └── glove/
-├── src/
-│   ├── data_loader.py
-│   ├── news_encoder.py
-│   ├── user_encoder.py
-│   ├── model.py
-│   ├── train.py
-│   └── evaluate.py
-├── notebooks/
-│   ├── 01_eda.ipynb
-│   ├── 02_preprocessing.ipynb
-│   └── 03_training.ipynb
-├── models/
-├── results/
-└── README.md
