@@ -45,16 +45,27 @@ Fields: user ID, timestamp, click history, impressions
 news.tsv
 
 ## Project structure:
-
+"""
 mind-recommender/
-├── data/               # Raw and processed news datasets (e.g., news.tsv)
-├── src/                # Python scripts for data processing and modeling
-├── notebooks/          # Jupyter notebooks for exploration
-│   └── 01_eda.ipynb    # Exploratory Data Analysis of news categories & lengths
-├── models/             # Saved model weights and configurations
-├── results/            # Exported visualizations (e.g., category_wordclouds.png)
-└── README.md           # Project documentation and setup instructions
-
+├── data/
+│   ├── MINDsmall_train/
+│   ├── MINDsmall_dev/
+│   └── glove/
+├── src/
+│   ├── data_loader.py
+│   ├── news_encoder.py
+│   ├── user_encoder.py
+│   ├── model.py
+│   ├── train.py
+│   └── evaluate.py
+├── notebooks/
+│   ├── 01_eda.ipynb
+│   ├── 02_preprocessing.ipynb
+│   └── 03_training.ipynb
+├── models/
+├── results/
+└── README.md
+"""
 ## 4.2 Exploratory Data Analysis
 
 The dataset was analyzed to understand user behavior and content structure.
