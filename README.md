@@ -13,7 +13,7 @@ News recommendation presents unique challenges due to rapidly changing user inte
 
 The workflow includes data preprocessing, feature engineering, model development, training, evaluation, and analysis.
 
-## 2. Learning Objectives
+## Learning Objectives
 
 By completing this project, the following skills are developed:
 
@@ -24,7 +24,7 @@ Implementing deep learning-based recommender systems in PyTorch
 Evaluating ranking models using standard metrics
 Performing error analysis and model interpretation
 
-## 3. Dataset Description (MIND)
+## Dataset Description (MIND)
 
 The MIND dataset is a large-scale news recommendation dataset released by Microsoft Research. It contains anonymized user interaction logs collected from Microsoft News.
 
@@ -42,7 +42,7 @@ behaviors.tsv
 User impression logs
 Fields: user ID, timestamp, click history, impressions, news.tsv
 
-# Methodology:
+# 2. Methodology:
 ## Project Structure
 
 ```text
@@ -66,7 +66,7 @@ mind-recommender/
 ├── results/                  # Generated plots and performance logs
 └── README.md                 # Project overview and setup instructions
 ```
-## 4.2 Exploratory Data Analysis
+## Exploratory Data Analysis
 
 The dataset was analyzed to understand user behavior and content structure.
 
@@ -128,7 +128,7 @@ Gradient clipping applied for stability
 
 Loss encourages higher scores for clicked articles compared to non-clicked ones.
 
-### 4.6 Evaluation and Metrics
+### Evaluation and Metrics
 
 The model is evaluated using standard recommendation metrics:
 
