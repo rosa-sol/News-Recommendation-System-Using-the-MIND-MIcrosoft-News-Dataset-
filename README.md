@@ -47,12 +47,13 @@ news.tsv
 ## Project structure:
 
 mind-recommender/
-├── data/
-├── src/
-├── notebooks/
-├── models/
-├── results/
-└── README.md
+├── data/               # Raw and processed news datasets (e.g., news.tsv)
+├── src/                # Python scripts for data processing and modeling
+├── notebooks/          # Jupyter notebooks for exploration
+│   └── 01_eda.ipynb    # Exploratory Data Analysis of news categories & lengths
+├── models/             # Saved model weights and configurations
+├── results/            # Exported visualizations (e.g., category_wordclouds.png)
+└── README.md           # Project documentation and setup instructions
 
 ## 4.2 Exploratory Data Analysis
 
