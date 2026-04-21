@@ -5,7 +5,7 @@ Course: Machine Learning Capstone
 Instructor: Sohaib Kiani
 Estimated Duration: 3–4 Weeks
 
-## 1. Project Overview
+## 1. Introduction/Project Overview
 
 This project develops an end-to-end news recommendation system using the MIND (Microsoft News Dataset). The objective is to predict user clicks on news articles based on historical user behavior and article content.
 
