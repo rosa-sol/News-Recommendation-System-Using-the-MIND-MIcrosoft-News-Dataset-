@@ -139,3 +139,5 @@ nDCG@10
 ```
 These metrics evaluate ranking quality and the model’s ability to prioritize relevant news articles.
 
+Note: Still working on assignment had to re-run my training loop. Will be done by 4/22.
+
