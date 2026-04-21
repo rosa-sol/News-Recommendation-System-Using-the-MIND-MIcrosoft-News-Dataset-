@@ -40,9 +40,7 @@ This project uses MIND-small for computational feasibility.
 behaviors.tsv
 
 User impression logs
-Fields: user ID, timestamp, click history, impressions
-
-news.tsv
+Fields: user ID, timestamp, click history, impressions, news.tsv
 
 ## Project structure:
 ## Project Structure
