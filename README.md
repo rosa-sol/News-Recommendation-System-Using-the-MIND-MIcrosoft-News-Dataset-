@@ -67,7 +67,7 @@ mind-recommender/
 ├── models/                   # Saved .pth or .h5 model weights
 ├── results/                  # Generated plots and performance logs
 └── README.md                 # Project overview and setup instructions
-
+```
 ## 4.2 Exploratory Data Analysis
 
 The dataset was analyzed to understand user behavior and content structure.
