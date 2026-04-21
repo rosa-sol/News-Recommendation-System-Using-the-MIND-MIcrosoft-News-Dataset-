@@ -70,7 +70,7 @@ mind-recommender/
 
 The dataset was analyzed to understand user behavior and content structure.
 
-Key analyses:
+# Key analyses:
 
 Click-through rate (CTR)
 Category and subcategory distributions
@@ -79,7 +79,7 @@ Impression size analysis
 Temporal click patterns (hourly and daily)
 Text statistics (title and abstract lengths)
 
-Findings:
+# Findings:
 
 Strong morning engagement peak around 08:00
 Highly skewed user activity distribution
@@ -87,7 +87,7 @@ Clear imbalance across news categories
 Event-driven spikes in daily click behavior
 4.3 Data Preprocessing and Feature Engineering
 
-Steps performed:
+# Steps performed:
 
 Tokenization of news titles
 Vocabulary construction with frequency filtering
@@ -97,14 +97,14 @@ Parsing user behavior sequences
 Generation of training samples using negative sampling
 Train/validation split following temporal order
 
-Each training sample consists of:
+# Each training sample consists of:
 
 User click history
 One positive news article
 Multiple negative sampled articles
 4.4 Model Architecture
 
-The model is based on an NRMS-style neural recommendation architecture.
+## The model is based on an NRMS-style neural recommendation architecture.
 
 News Encoder
 Word embedding layer (GloVe)
@@ -117,14 +117,7 @@ Attention-based aggregation of user history
 Scoring Function
 Dot product between user representation and candidate news vectors
 
-Output:
-
-Relevance scores for candidate articles
-4.5 Training Procedure
-
-Training is performed using cross-entropy loss over candidate impressions.
-
-Key settings:
+## Key settings:
 
 Optimizer: Adam
 Learning rate: 1e-4
@@ -135,7 +128,7 @@ Gradient clipping applied for stability
 
 Loss encourages higher scores for clicked articles compared to non-clicked ones.
 
-4.6 Evaluation and Metrics
+## 4.6 Evaluation and Metrics
 
 The model is evaluated using standard recommendation metrics:
 
