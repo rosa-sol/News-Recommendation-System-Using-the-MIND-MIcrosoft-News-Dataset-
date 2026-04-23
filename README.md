@@ -141,3 +141,39 @@ These metrics evaluate ranking quality and the model’s ability to prioritize r
 
 Note: Still working on assignment had to re-run my training loop. Will be done by 4/22.
 
+# Results 
+```text
+For learning rate of: 1×10⁻⁴
+======================================
+  EVALUATION RESULTS
+======================================
+  AUC       : 0.6793
+  MRR       : 0.3886
+  nDCG@5    : 0.3660
+  nDCG@10   : 0.4232
+  Impressions: 156,965
+======================================
+Metrics saved to results/eval_metrics.json
+```
+### Quantitative Results
+The baseline model was evaluated across 156,965 dev-set impressions using four standard MIND benchmark metrics.
+AUC (0.6793) measures how often the model ranks a clicked article above a non-clicked one — here, about 68% of the time. The 18-point margin above random (0.50) confirms the model has learned genuine user preference from title text alone, though roughly one in three pairwise comparisons still goes the wrong way.
+MRR (0.3886) places the first relevant article at roughly rank 2–3 on average. The model frequently promotes the right article into the top handful but does not reliably push it to position 1 — meaningful for interfaces that surface a ranked list, more problematic for those showing only a single result.
+nDCG@5 (0.3660) and nDCG@10 (0.4232) are most informative together. The gap of ~0.057 between the two cutoffs indicates that a meaningful share of relevant articles land in positions 6–10 rather than the top 5. The model is finding the right content but not surfacing it aggressively enough — it ranks correctly in a broad sense but lacks the precision to concentrate hits at the very top.
+
+### Comparison with Established Baselines
+Comparison with Established Baselines
+| Metric | Random | Basic NRMS | Tuned NRMS | Run 1 | 
+|------|-------|-----|-------|----|
+| AUC | ~0.500 | 0.62–0.66 | 0.67–0.70 | 0.6793 |
+| MMR | ~0.200 | 0.28–0.31 | 0.31–0.34 | 0.3886 |
+| nDCG@5 | ~0.200 | 0.30–0.34 | 0.34–0.38 | 0.3660 |
+| nDCG@10 | ~0.300 | 0.36–0.40 | 0.40–0.44 | 0.4232 |
+
+### Error Analysis
+Short click histories. The user encoder relies on self-attention across clicked articles to build a preference profile. Users with only one or two items in their history give the attention mechanism almost nothing to work with, producing a user vector dominated by a single article rather than a genuine interest pattern. These users likely account for a disproportionate share of nDCG@5 misses.
+Title-only representation. The news encoder sees only the headline — 30 tokens at most. Articles on similar topics with different surface wording produce similar vectors, limiting the model's ability to discriminate between them. Abstract and category features, omitted here, carry substantial disambiguating signal and are the most direct explanation for the remaining gap to tuned NRMS.
+Popular-item bias. Negatives are sampled uniformly from each impression list during training, with no correction for article frequency. Frequently appearing articles are suppressed as negatives many times, which may cause the model to under-score them even when they are genuinely relevant — a likely contributor to the nDCG@5 shortfall.
+
+What the metrics do not capture. AUC, MRR, and nDCG are all rank-based and treat every impression independently. They do not measure diversity, novelty, or whether the model recommends the same few articles repeatedly across users — practical failure modes invisible in these numbers.
+
