@@ -170,6 +170,9 @@ Comparison with Established Baselines
 | nDCG@5 | ~0.200 | 0.30–0.34 | 0.34–0.38 | 0.3660 |
 | nDCG@10 | ~0.300 | 0.36–0.40 | 0.40–0.44 | 0.4232 |
 
+The baseline clears the basic NRMS range on every metric and sits within the tuned range on three of the four. 
+nDCG@5 is the one metric that falls just short of the tuned floor, reflecting the precision gap noted above. Overall the model performs at the upper end of a basic implementation and overlaps substantially with tuned performance.
+
 ### Error Analysis
 Short click histories. The user encoder relies on self-attention across clicked articles to build a preference profile. Users with only one or two items in their history give the attention mechanism almost nothing to work with, producing a user vector dominated by a single article rather than a genuine interest pattern. These users likely account for a disproportionate share of nDCG@5 misses.
 Title-only representation. The news encoder sees only the headline — 30 tokens at most. Articles on similar topics with different surface wording produce similar vectors, limiting the model's ability to discriminate between them. Abstract and category features, omitted here, carry substantial disambiguating signal and are the most direct explanation for the remaining gap to tuned NRMS.
