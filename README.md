@@ -142,6 +142,7 @@ These metrics evaluate ranking quality and the model’s ability to prioritize r
 Note: Still working on assignment had to re-run my training loop. Will be done by 4/22.
 
 # Results - visuals in Notebook: 03_training
+### Run 1
 ```text
 For learning rate of: 1×10⁻⁴
 ======================================
