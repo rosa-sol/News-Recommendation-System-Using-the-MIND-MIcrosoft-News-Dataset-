@@ -178,5 +178,7 @@ nDCG@5 is the one metric that falls just short of the tuned floor, reflecting th
 Short click histories - The user encoder relies on self-attention across clicked articles to build a preference profile. Users with only one or two items in their history give the attention mechanism almost nothing to work with, producing a user vector dominated by a single article rather than a genuine interest pattern. These users likely account for a disproportionate share of nDCG@5 misses.
 Title-only representation - The news encoder sees only the headline — 30 tokens at most. Articles on similar topics with different surface wording produce similar vectors, limiting the model's ability to discriminate between them. 
 Popular-item bias - Negatives are sampled uniformly from each impression list during training, with no correction for article frequency. Frequently appearing articles are suppressed as negatives many times, which may cause the model to under-score them even when they are genuinely relevant — a likely contributor to the nDCG@5 shortfall.
-.
+# Comparison of Tuned Runs/Hyperparameters
+
+# Conclusions
 
