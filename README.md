@@ -141,7 +141,7 @@ These metrics evaluate ranking quality and the model’s ability to prioritize r
 
 Note: Still working on assignment had to re-run my training loop. Will be done by 4/22.
 
-# Results 
+# Results - visuals in Notebook: 03_training
 ```text
 For learning rate of: 1×10⁻⁴
 ======================================
@@ -174,9 +174,8 @@ The baseline clears the basic NRMS range on every metric and sits within the tun
 nDCG@5 is the one metric that falls just short of the tuned floor, reflecting the precision gap noted above. Overall the model performs at the upper end of a basic implementation and overlaps substantially with tuned performance.
 
 ### Error Analysis
-Short click histories. The user encoder relies on self-attention across clicked articles to build a preference profile. Users with only one or two items in their history give the attention mechanism almost nothing to work with, producing a user vector dominated by a single article rather than a genuine interest pattern. These users likely account for a disproportionate share of nDCG@5 misses.
-Title-only representation. The news encoder sees only the headline — 30 tokens at most. Articles on similar topics with different surface wording produce similar vectors, limiting the model's ability to discriminate between them. Abstract and category features, omitted here, carry substantial disambiguating signal and are the most direct explanation for the remaining gap to tuned NRMS.
-Popular-item bias. Negatives are sampled uniformly from each impression list during training, with no correction for article frequency. Frequently appearing articles are suppressed as negatives many times, which may cause the model to under-score them even when they are genuinely relevant — a likely contributor to the nDCG@5 shortfall.
-
-What the metrics do not capture. AUC, MRR, and nDCG are all rank-based and treat every impression independently. They do not measure diversity, novelty, or whether the model recommends the same few articles repeatedly across users — practical failure modes invisible in these numbers.
+Short click histories - The user encoder relies on self-attention across clicked articles to build a preference profile. Users with only one or two items in their history give the attention mechanism almost nothing to work with, producing a user vector dominated by a single article rather than a genuine interest pattern. These users likely account for a disproportionate share of nDCG@5 misses.
+Title-only representation - The news encoder sees only the headline — 30 tokens at most. Articles on similar topics with different surface wording produce similar vectors, limiting the model's ability to discriminate between them. 
+Popular-item bias - Negatives are sampled uniformly from each impression list during training, with no correction for article frequency. Frequently appearing articles are suppressed as negatives many times, which may cause the model to under-score them even when they are genuinely relevant — a likely contributor to the nDCG@5 shortfall.
+.
 
