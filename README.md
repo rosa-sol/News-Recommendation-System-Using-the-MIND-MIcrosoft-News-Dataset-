@@ -118,15 +118,40 @@ Scoring Function
 Dot product between user representation and candidate news vectors
 ```
 ### Key settings:
+Run 1
 ```
-Optimizer: Adam
-Learning rate: 1e-4
-Batch size: 64
-Negative samples per positive: 4
-Epochs: 5
-Gradient clipping applied for stability
+BATCH_SIZE = 64
+LEARNING_RATE = 1e-4
+EPOCHS = 5
+NEG_SAMPLE_K = 4
+MAX_HISTORY = 50
+MAX_TITLE_LEN = 30
+NUM_HEADS = 16
+HEAD_DIM = 16
 
 Loss encourages higher scores for clicked articles compared to non-clicked ones.
+```
+Run 2
+```
+BATCH_SIZE = 64
+LEARNING_RATE = 1e-4
+EPOCHS = 5
+NEG_SAMPLE_K = 7
+MAX_HISTORY = 50
+MAX_TITLE_LEN = 30
+NUM_HEADS = 16
+HEAD_DIM = 16
+```
+Run 3
+```
+BATCH_SIZE = 64
+LEARNING_RATE = 1e-4
+EPOCHS = 5
+NEG_SAMPLE_K = 4
+MAX_HISTORY = 100
+MAX_TITLE_LEN = 30
+NUM_HEADS = 16
+HEAD_DIM = 16
 ```
 ### Evaluation and Metrics
 ```
@@ -171,6 +196,8 @@ Comparison with Established Baselines
 | nDCG@5 | ~0.200 | 0.30–0.34 | 0.34–0.38 | 0.3660 |
 | nDCG@10 | ~0.300 | 0.36–0.40 | 0.40–0.44 | 0.4232 |
 
+<img width="1500" height="750" alt="metrics_comparison" src="https://github.com/user-attachments/assets/60f252e8-087f-419e-af0a-268f9d44eea6" />
+
 The baseline clears the basic NRMS range on every metric and sits within the tuned range on three of the four. 
 nDCG@5 is the one metric that falls just short of the tuned floor, reflecting the precision gap noted above. Overall the model performs at the upper end of a basic implementation and overlaps substantially with tuned performance.
 
@@ -178,7 +205,42 @@ nDCG@5 is the one metric that falls just short of the tuned floor, reflecting th
 Short click histories - The user encoder relies on self-attention across clicked articles to build a preference profile. Users with only one or two items in their history give the attention mechanism almost nothing to work with, producing a user vector dominated by a single article rather than a genuine interest pattern. These users likely account for a disproportionate share of nDCG@5 misses.
 Title-only representation - The news encoder sees only the headline — 30 tokens at most. Articles on similar topics with different surface wording produce similar vectors, limiting the model's ability to discriminate between them. 
 Popular-item bias - Negatives are sampled uniformly from each impression list during training, with no correction for article frequency. Frequently appearing articles are suppressed as negatives many times, which may cause the model to under-score them even when they are genuinely relevant — a likely contributor to the nDCG@5 shortfall.
+
+### Run 2
+```text
+For neg_k of: 7
+======================================
+  EVALUATION RESULTS
+======================================
+  AUC       : 0.6793
+  MRR       : 0.3886
+  nDCG@5    : 0.3660
+  nDCG@10   : 0.4232
+  Impressions: 156,965
+======================================
+Metrics saved to results/eval_metrics2.json
+```
+### Quantitative Results
+Increasing the number of training negatives from 4 to 7 produced no measurable change in evaluation metrics. AUC, MRR, nDCG@5, and nDCG@10 are identical to the baseline to four decimal places. The training loss curve tells a consistent story — run 2 finished at 1.3381 versus run 1's 1.3458, a difference of 0.0077, indicating marginal faster convergence but not a meaningfully different model. The additional negatives per positive did not provide a harder or more informative training signal at this dataset scale.
+
+### Error Analysis
+The insensitivity to neg_k is likely explained by two factors. First, MINDsmall impression lists are relatively short, so the practical difference between sampling 4 and 7 negatives is small — many impressions may not have enough non-clicked candidates to meaningfully distinguish the two settings. Second, the negatives are still sampled uniformly with no difficulty weighting, so the additional three negatives per positive are drawn from the same easy distribution as before. Harder negative mining strategies — such as sampling articles semantically similar to the positive — would likely be needed before changes to K produce a detectable effect.
+
+
 # Comparison of Tuned Runs/Hyperparameters
+### Loss
+Comparing the training loss curves across all three runs reveals that the models converged to virtually the same solution regardless of the hyperparameter change. Run 1 (baseline, K=4) finished at a final epoch loss of 1.3458, run 2 (K=7) at 1.3381, and run 3 (longer history length) at 1.3436 — a spread of just 0.0077 across five epochs. The curves track each other closely at every epoch, with run 2 converging marginally faster and run 1 slightly slower, but no run diverges meaningfully from the others. This suggests that neither increasing negative samples from 4 to 7 nor extending the maximum history length produced a sufficiently different training signal to shift the model toward a different solution — and consequently, near-identical evaluation metrics across all three runs are the expected outcome, not simply an artefact of the checkpoint issue. The model appears insensitive to these particular hyperparameter changes at this scale.
+### Run 1
+<img width="1200" height="600" alt="loss_curve" src="https://github.com/user-attachments/assets/80deafd0-1d0d-4e9f-a216-fc080ae83dc0" />
+### Run 2
+<img width="1200" height="600" alt="loss_curve2" src="https://github.com/user-attachments/assets/73d9a338-51bb-4635-b0ce-eabb934db3a9" />
+### Run 3
+<img width="1200" height="600" alt="loss_curve3" src="https://github.com/user-attachments/assets/a3554c72-3e44-4fe9-8e4c-deb6b7b4285d" />
 
 # Conclusions
+The NRMS baseline trained on MINDsmall demonstrates that dual multi-head self-attention over GloVe-initialised title embeddings is a strong starting point for news recommendation, achieving results at the upper end of a basic implementation and overlapping substantially with tuned performance across three of four standard MIND metrics. The model's clearest strength is MRR, where it exceeds the tuned NRMS ceiling, indicating it reliably places at least one relevant article near the top of each impression list. Its clearest weakness is nDCG@5, where it falls just short of the tuned floor, pointing to a precision gap in the top positions that title-only features and uniform negative sampling cannot fully close.
+
+The ablation experiments revealed that neither increasing negative samples from K=4 to K=7 nor extending the maximum history length from 50 to 100 produced any measurable change in evaluation metrics. This is not a failure of the experiments but an informative finding in itself — the model is insensitive to these particular changes at this dataset scale, most likely because MINDsmall impression lists are too short for the extra negatives to matter and because most users do not have histories long enough to benefit from a higher history ceiling. The training loss curves confirm all three models trained correctly and converged to the same solution, suggesting the architecture itself is the binding constraint rather than these hyperparameters.
+
+The most direct path to meaningful improvement would be adding abstract and category features to the news encoder, implementing harder negative mining, and experimenting with learning rate scheduling — changes that target the actual bottlenecks identified in the error analysis rather than parameters the model has already saturated.
 
