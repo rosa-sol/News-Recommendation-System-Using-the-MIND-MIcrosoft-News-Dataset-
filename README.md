@@ -36,7 +36,7 @@ MIND-large	1,000,000	~160,000	~15,000,000	~24,000,000
 This project uses MIND-small for computational feasibility.
 
 # Key Files
-
+```text
 behaviors.tsv
 
 User impression logs
@@ -46,7 +46,7 @@ NOTE:
 01_eda.ipynb - contains key visuals and analysis of the dataset 
 02_preprocessing.ipynb - contains preprossesing for data loader, news encoder, user encoder, and model
 03_training.ipynb - contains results, visuals, and train/evalutation code
-
+```
 # 2. Methodology:
 ## Project Structure
 
