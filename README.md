@@ -39,10 +39,19 @@ This project uses MIND-small for computational feasibility.
 ```text
 User impression logs
 Fields: user ID, timestamp, click history, impressions, news.tsv, behaviors.tsv
+
 Notebook Files:
 01_eda.ipynb - contains key visuals and analysis of the dataset 
 02_preprocessing.ipynb - contains preprossesing for data loader, news encoder, user encoder, and model
 03_training.ipynb - contains results, visuals, and train/evalutation code
+
+src files:
+data_loader.py
+news_encoder.py
+user_encoder.py
+model.py
+train.py
+evlauate.py
 ```
 # 2. Methodology:
 ## Project Structure
