@@ -87,7 +87,27 @@ mind-recommender/
 7. Generation of training samples using negative sampling
 8. Train/validation split following temporal order
 ```
-### Key analyses of dataset:
+### Each training sample consists of:
+
+User click history
+One positive news article
+Multiple negative sampled articles
+4.4 Model Architecture
+
+## The model is based on an NRMS-style neural recommendation architecture.
+```text
+News Encoder
+Word embedding layer (GloVe)
+Multi-head self-attention
+Additive attention pooling
+User Encoder
+Encodes sequence of clicked news articles
+Shared news encoder weights
+Attention-based aggregation of user history
+Scoring Function
+Dot product between user representation and candidate news vectors
+```
+### Key analyses of dataset prior to ML experiments:
 
 ### Click-through rate (CTR)
 <img width="1000" height="500" alt="image" src="https://github.com/user-attachments/assets/01af3a72-dd0f-48ea-85d5-d4738d95eeee" />
@@ -135,27 +155,7 @@ Clear imbalance across news categories
 Event-driven spikes in daily click behavior
 4.3 Data Preprocessing and Feature Engineering
 
-### Each training sample consists of:
-
-User click history
-One positive news article
-Multiple negative sampled articles
-4.4 Model Architecture
-
-## The model is based on an NRMS-style neural recommendation architecture.
-```text
-News Encoder
-Word embedding layer (GloVe)
-Multi-head self-attention
-Additive attention pooling
-User Encoder
-Encodes sequence of clicked news articles
-Shared news encoder weights
-Attention-based aggregation of user history
-Scoring Function
-Dot product between user representation and candidate news vectors
-```
-### Key settings:
+### Key settings of experiment:
 Run 1
 ```
 BATCH_SIZE = 64
@@ -202,8 +202,6 @@ nDCG@5
 nDCG@10
 ```
 These metrics evaluate ranking quality and the model’s ability to prioritize relevant news articles.
-
-Note: Still working on assignment had to re-run my training loop. Will be done by 4/22.
 
 # Results - visuals in Notebook: 03_training
 ### Run 1
