@@ -37,12 +37,9 @@ This project uses MIND-small for computational feasibility.
 
 # Key Files
 ```text
-behaviors.tsv
-
 User impression logs
-Fields: user ID, timestamp, click history, impressions, news.tsv
-
-NOTE: 
+Fields: user ID, timestamp, click history, impressions, news.tsv, behaviors.tsv
+Notebook Files:
 01_eda.ipynb - contains key visuals and analysis of the dataset 
 02_preprocessing.ipynb - contains preprossesing for data loader, news encoder, user encoder, and model
 03_training.ipynb - contains results, visuals, and train/evalutation code
@@ -73,23 +70,43 @@ mind-recommender/
 ```
 ### Key analyses:
 
-Click-through rate (CTR)
+### Click-through rate (CTR)
 <img width="1000" height="500" alt="image" src="https://github.com/user-attachments/assets/01af3a72-dd0f-48ea-85d5-d4738d95eeee" />
+#### Interpretation — Distribution of User Click Activity
+The distribution of user click activity is highly skewed, showing that most users generate only a small number of clicks while a small minority of users are extremely active. This indicates a long-tail engagement pattern where a few heavy users contribute disproportionately to overall interaction volume. A potential data quality issue is user activity imbalance, which may bias models toward highly active users and reduce performance for low-activity or new users.
 
-Category and subcategory distributions:
+### Category and subcategory distributions:
 <img width="1200" height="600" alt="image" src="https://github.com/user-attachments/assets/3471bd28-089c-44fc-8c15-51b25dfa929f" />
+#### Interpretation - Category Distribution
+The category distribution shows that a small number of categories dominate the dataset while several categories appear infrequently. News and sports have signigicantly more article counts. This imbalance suggests potential bias where models may learn majority-category patterns better than minority ones - a data quality concern is class imbalance, which may require weighting or resampling during training.
 
-User activity distribution
+### Log-Log - Power-Law Behavior
 <img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/cc08ba0f-3d5f-4df3-aae3-7bbf988bd952" />
+#### Interpretation - Log-Log
+The log-log visualization suggests approximate power-law behavior, confirming that user engagement follows a heavy-tailed distribution. A small number of users contribute disproportionately to total activity. This distribution highlights a potential data imbalance issue that could bias evaluation metrics if not handled carefully.
 
-Impression size analysis:
+### History Length Analysis
+<img width="868" height="547" alt="image" src="https://github.com/user-attachments/assets/964cdb88-cf3b-4ad8-b7ca-5d3728d761e8" />
+#### Interpretation — Distribution of User History
+The distribution of user history lengths shows that most impressions come from users with relatively short interaction histories, with activity starting high at low history values and steadily declining by around 200 articles. The mean history length (32.5) being higher than the median (19.0), along with a 90th percentile of 78, indicates a right-skewed distribution where a small number of users have much longer histories. A potential data quality concern is history-length imbalance, as models may learn more effectively from highly active users while users with limited history provide less behavioral information.
+
+### Impression size analysis:
 <img width="1000" height="600" alt="image" src="https://github.com/user-attachments/assets/bc45f0f3-9533-49e4-9d40-41e834354aba" />
+#### Interpretation — Impression Size Analysis
+The distribution of impression sizes shows that most impressions contain a small number of candidate items, with frequency starting very high at low candidate counts and decreasing sharply as impression size increases. Although the mean impression size is 37.2, the rapid downward slope indicates a right-skewed distribution where large impressions are relatively rare compared to smaller ones. A potential data quality issue is imbalance in impression sizes, which may affect model evaluation since users exposed to larger candidate sets can influence click probability and ranking performance differently.
 
-Temporal click patterns (hourly and daily):
+### Temporal click patterns (hourly and daily):
 <img width="1600" height="600" alt="image" src="https://github.com/user-attachments/assets/60fafb95-7d2d-4857-bdd8-46bc46cd5d48" />
+#### Interpretation - Temporal patterms
+News consumption peaks sharply at 8:00 AM, remains elevated until around 11:00, and then gradually declines for the rest of the day, suggesting strong morning-driven engagement. Across the Nov 9–14 window, total clicks rise to a clear peak on Nov 12 before tapering off, indicating a short-lived spike in interest or event-driven traffic. A potential data quality concern is the apparent single-day sharp peak on Nov 12, which could reflect either a real external event or an anomaly such as duplicated clicks, tracking inconsistency, or uneven data collection across days. Additionally, if timestamps are aggregated without timezone normalization, the strong 8:00 AM peak could be partially distorted by shifted logging times.
 
-Text statistics (title and abstract lengths)
+### Text statistics (title and abstract lengths)
 <img width="1400" height="600" alt="image" src="https://github.com/user-attachments/assets/1cda626e-5bb2-4aaa-9965-f3e812ee840a" />
+<img width="1990" height="691" alt="image" src="https://github.com/user-attachments/assets/ad15fb90-3759-4a1c-88de-178165808e6d" />
+
+#### Interpretation - Text statistics (Title length distribution)
+The dataset shows relatively concise content, with headlines averaging 10.75 words and abstracts averaging 34.29 words, suggesting a format optimized for quick consumption while still providing brief context. This balance is typical of news-style data where titles are designed for scanning and abstracts for short summaries. A potential data quality issue is the lack of variability information (e.g., distribution, min/max, or outliers), which makes it difficult to assess whether a few unusually long or short entries are skewing the averages. It’s also worth verifying consistent tokenization (e.g., how punctuation, hyphenated words, or encoding artifacts were handled), as these can slightly distort word counts.
+Belpw the charts I have displayed Top Words in News, Sportsm and Finance. Larger font words equate to more frequency in their respective category.
 
 ### Key finding of Exploratory Data Analysis (EDA):
 
