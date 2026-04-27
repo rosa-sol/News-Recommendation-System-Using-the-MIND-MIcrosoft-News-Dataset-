@@ -38,7 +38,7 @@ This project uses MIND-small for computational feasibility.
 # Key Files
 ```text
 User impression logs
-Fields: user ID, timestamp, click history, impressions, news.tsv, behaviors.tsv
+Fields: news.tsv, behaviors.tsv
 
 Notebook Files:
 01_eda.ipynb - contains key visuals and analysis of the dataset 
