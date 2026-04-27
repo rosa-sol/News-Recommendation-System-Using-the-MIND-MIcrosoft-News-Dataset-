@@ -94,13 +94,13 @@ Event-driven spikes in daily click behavior
 
 ### Steps performed:
 ```text
-Tokenization of news titles
-Vocabulary construction with frequency filtering
-Mapping tokens to GloVe embeddings
-Fixed-length padding and truncation of titles
-Parsing user behavior sequences
-Generation of training samples using negative sampling
-Train/validation split following temporal order
+1. Tokenization of news titles
+2. Vocabulary construction with frequency filtering
+3. Mapping tokens to GloVe embeddings
+4. Fixed-length padding and truncation of titles
+6. Parsing user behavior sequences
+7. Generation of training samples using negative sampling
+8. Train/validation split following temporal order
 ```
 ### Each training sample consists of:
 
