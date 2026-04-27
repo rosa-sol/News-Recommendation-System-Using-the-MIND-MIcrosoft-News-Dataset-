@@ -77,7 +77,17 @@ mind-recommender/
 ├── results/                  # Generated plots and performance logs
 └── README.md                 # Project overview and setup instructions
 ```
-### Key analyses:
+### Steps performed:
+```text
+1. Tokenization of news titles
+2. Vocabulary construction with frequency filtering
+3. Mapping tokens to GloVe embeddings
+4. Fixed-length padding and truncation of titles
+6. Parsing user behavior sequences
+7. Generation of training samples using negative sampling
+8. Train/validation split following temporal order
+```
+### Key analyses of dataset:
 
 ### Click-through rate (CTR)
 <img width="1000" height="500" alt="image" src="https://github.com/user-attachments/assets/01af3a72-dd0f-48ea-85d5-d4738d95eeee" />
@@ -125,17 +135,6 @@ Clear imbalance across news categories
 Event-driven spikes in daily click behavior
 4.3 Data Preprocessing and Feature Engineering
 
-
-### Steps performed:
-```text
-1. Tokenization of news titles
-2. Vocabulary construction with frequency filtering
-3. Mapping tokens to GloVe embeddings
-4. Fixed-length padding and truncation of titles
-6. Parsing user behavior sequences
-7. Generation of training samples using negative sampling
-8. Train/validation split following temporal order
-```
 ### Each training sample consists of:
 
 User click history
