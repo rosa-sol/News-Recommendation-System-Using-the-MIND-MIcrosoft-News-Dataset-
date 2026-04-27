@@ -71,26 +71,34 @@ mind-recommender/
 ├── results/                  # Generated plots and performance logs
 └── README.md                 # Project overview and setup instructions
 ```
-## Exploratory Data Analysis
-
-The dataset was analyzed to understand user behavior and content structure.
-
 ### Key analyses:
 
 Click-through rate (CTR)
-Category and subcategory distributions
-User activity distribution
-Impression size analysis
-Temporal click patterns (hourly and daily)
-Text statistics (title and abstract lengths)
+<img width="1000" height="500" alt="image" src="https://github.com/user-attachments/assets/01af3a72-dd0f-48ea-85d5-d4738d95eeee" />
 
-### Findings:
+Category and subcategory distributions:
+<img width="1200" height="600" alt="image" src="https://github.com/user-attachments/assets/3471bd28-089c-44fc-8c15-51b25dfa929f" />
+
+User activity distribution
+<img width="640" height="480" alt="image" src="https://github.com/user-attachments/assets/cc08ba0f-3d5f-4df3-aae3-7bbf988bd952" />
+
+Impression size analysis:
+<img width="1000" height="600" alt="image" src="https://github.com/user-attachments/assets/bc45f0f3-9533-49e4-9d40-41e834354aba" />
+
+Temporal click patterns (hourly and daily):
+<img width="1600" height="600" alt="image" src="https://github.com/user-attachments/assets/60fafb95-7d2d-4857-bdd8-46bc46cd5d48" />
+
+Text statistics (title and abstract lengths)
+<img width="1400" height="600" alt="image" src="https://github.com/user-attachments/assets/1cda626e-5bb2-4aaa-9965-f3e812ee840a" />
+
+### Key finding of Exploratory Data Analysis (EDA):
 
 Strong morning engagement peak around 08:00
 Highly skewed user activity distribution
 Clear imbalance across news categories
 Event-driven spikes in daily click behavior
 4.3 Data Preprocessing and Feature Engineering
+
 
 ### Steps performed:
 ```text
